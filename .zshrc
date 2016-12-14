@@ -27,6 +27,8 @@ setopt pushd_ignore_dups
 setopt AUTO_CD
 setopt AUTO_LIST
 
+# vagrant
+export PATH="$PATH:/opt/vagrant/bin/:/usr/local/bin"
 
 #auto modify incorrect command
 setopt correct
@@ -39,6 +41,7 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 
 #alias
 #alias srv='mosh root@192.168.10.20'
+alias ssh=~/bin/ssh-host-color
 alias srv='mosh taka@192.168.10.20'
 alias ops='ssh root@192.168.10.254'
 alias vps='ssh -p 3843 taka@36.55.232.44'
