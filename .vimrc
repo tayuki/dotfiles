@@ -35,6 +35,11 @@ NeoBundle 'mrk21/yaml-vim'
 NeoBundle 'moznion/hateblo.vim'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'moznion/hateblo.vim'
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'kannokanno/previm'
+NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'glidenote/memolist.vim'
+NeoBundle 'chase/vim-ansible-yaml'
 
 call neobundle#end()
 
@@ -104,11 +109,22 @@ hi IndentGuidesEven ctermbg=237
 au FileType coffee,ruby,javascript,python IndentGuidesEnable
 nmap <silent><Leader>ig <Plug>IndentGuidesToggle
 
+
+" memolist
+nnoremap <Leader>mn  :MemoNew<CR>
+nnoremap <Leader>ml  :MemoList<CR>
+nnoremap <Leader>mg  :MemoGrep<CR>
+let g:memolist_memo_suffix = "md"
+
 " Other programming staffs
 set showmatch
 au FileType javascript set ts=2 sw=2 expandtab
 au BufNewFile *.js set ft=javascript fenc=utf-8
 autocmd FileType javascript let g:AutoComplPop_CompleteOption = '.,w,b,u,t,i,k~/.vim/dict/javascript.dict'
+
+" Mark down preview
+au BufRead,BufNewFile *.md set filetype=markdown
+let g:previm_open_cmd = 'open -a Firefox'
 
 
 set autoindent
@@ -152,5 +168,38 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
+
+"Unite key bind
+"インサートモードで開始
+let g:unite_enable_start_insert=1
+"ヒストリー/ヤンク機能を有効化
+let g:unite_source_history_yank_enable =1
+"prefix keyの設定
+nmap <Space> [unite]
+
+"スペースキーとaキーでカレントディレクトリを表示
+nnoremap <silent> [unite]a :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+"スペースキーとfキーでバッファと最近開いたファイル一覧を表示
+nnoremap <silent> [unite]f :<C-u>Unite<Space>buffer file_mru<CR>
+"スペースキーとdキーで最近開いたディレクトリを表示
+nnoremap <silent> [unite]d :<C-u>Unite<Space>directory_mru<CR>
+"スペースキーとbキーでバッファを表示
+nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
+"スペースキーとrキーでレジストリを表示
+nnoremap <silent> [unite]r :<C-u>Unite<Space>register<CR>
+"スペースキーとtキーでタブを表示
+nnoremap <silent> [unite]t :<C-u>Unite<Space>tab<CR>
+"スペースキーとhキーでヒストリ/ヤンクを表示
+nnoremap <silent> [unite]h :<C-u>Unite<Space>history/yank<CR>
+"スペースキーとoキーでoutline
+nnoremap <silent> [unite]o :<C-u>Unite<Space>outline<CR>
+"スペースキーとENTERキーでfile_rec:!
+nnoremap <silent> [unite]<CR> :<C-u>Unite<Space>file_rec:!<CR>
+"unite.vimを開いている間のキーマッピング
+autocmd FileType unite call s:unite_my_settings()
+function! s:unite_my_settings()"{{{
+    " ESCでuniteを終了
+    nmap <buffer> <ESC> <Plug>(unite_exit)
+endfunction"}}}
 
 NeoBundleCheck
