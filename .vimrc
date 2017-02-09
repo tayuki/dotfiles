@@ -13,12 +13,12 @@ endif
 call neobundle#begin(expand('~/.vim/.bundle/'))
 
 NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'git://github.com/Shougo/vimproc.git'
-NeoBundle 'git://github.com/thinca/vim-quickrun.git'
-NeoBundle 'git://github.com/tpope/vim-surround.git'
-NeoBundle 'git://github.com/Shougo/unite.vim'
-NeoBundle 'git://github.com/tpope/vim-rails'
-NeoBundle 'git://github.com/slim-template/vim-slim'
+NeoBundle 'Shougo/vimproc.git'
+NeoBundle 'thinca/vim-quickrun.git'
+NeoBundle 'tpope/vim-surround.git'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'tpope/vim-rails'
+NeoBundle 'slim-template/vim-slim'
 NeoBundle 'scrooloose/nerdtree.git'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'nathanaelkane/vim-indent-guides'
