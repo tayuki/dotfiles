@@ -51,6 +51,9 @@ set nocompatible
 set history=50
 set ts=2
 set laststatus=2
+set expandtab
+set tabstop=2
+set shiftwidth=2
 " set paste
 
 " 「日本語入力固定モード」の動作モード
