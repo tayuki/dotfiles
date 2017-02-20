@@ -1,6 +1,6 @@
 *quickrun.txt*	Run a command and show its result quickly.
 
-Version: 0.6.0
+Version: 0.7.0
 Author: thinca <thinca+vim@gmail.com>
 English documentation by:
   * ujihisa <ujihisa at gmail com>
@@ -171,14 +171,8 @@ quickrun#sweep_sessions()			*quickrun#sweep_sessions()*
 	Stops the sessions under execution.  This is called before new
 	execution.  When execution doesn't end, you can call this by manually.
 
-
-The following functions are deprecated.  These will be removed at next
-version.
-quickrun#register_module({kind}, {name}, {module})
-quickrun#register_runner({name}, {runner})
-quickrun#register_outputter({name}, {outputter})
-quickrun#register_hook({name}, {hook})
-quickrun#get_module({kind} [, {name}])
+quickrun#is_running()				*quickrun#is_running()*
+	Checks any session is running.  Returns non-zero when running.
 
 
 ------------------------------------------------------------------------------
@@ -454,17 +448,8 @@ default.  NOTE: Everything except for "system" can be unstable.
 	by 'updatetime' when program will stop immediately.
   runner/vimproc/updatetime		Default: 0
 	Changes 'updatetime' to the value temporary.  Stays same if this is 0.
-
-- "runner/process_manager"	*quickrun-module-runner/process_manager*
-  (DEPRECATED) Same as |quickrun-module-runner/concurrent_process| it runs
-  process at background and reuses it. The difference between this and
-  concurrent_process is the lower layer library what they are using.
-
-  Option ~
-  runner/process_manager/load			Default: "load %s"
-  runner/process_manager/prompt			Default: ">>> "
-  Refer the ones at concurrent_process. They have compatibility so that you
-  can toggle which one to use just by changing these names.
+  runner/vimproc/read_timeout		Default: 100
+	The time to read at one time. (milliseconds)
 
 - "runner/concurrent_process"	*quickrun-module-runner/concurrent_process*
   {Requirement: |vimproc|}
@@ -510,6 +495,18 @@ default.  NOTE: Everything except for "system" can be unstable.
   Runs by |python| thread asynchronously.
   WARNING: This is absolutely unstable.
   WARNING: Don't use this on X11.  Vim crashes.
+
+- "runner/job"				*quickrun-module-runner/job*
+  {Experimental}
+  {Requirement: |+job|}
+  Runs via |job| feature.
+  Option ~
+  runner/job/interval		Default: 0
+	Before Vim 8.0.0036, job feature checks about every 10 seconds for
+	jobs that ended (|job-exit_cb|).
+	When this value is not 0, this checks the end of job every specified
+	time in milliseconds by |timer|.
+	This option may be unnecessary when you use Vim 8.0.0036 or later.
 
 - "runner/vimscript"			*quickrun-module-runner/vimscript*
   Runs commands as Vim commands.
@@ -576,8 +573,26 @@ available by default.
 - "outputter/quickfix"			*quickrun-module-outputter/quickfix*
   Outputs on |quickfix|.
   Option ~
-  outputter/quickfix/errorformat		Default: "&errorformat"
+  outputter/quickfix/errorformat	Default: "&errorformat"
 	'errorformat' option to parse the output.
+  outputter/quickfix/open_cmd		Default: "copen"
+	The command to open |quickfix-window|.
+	The window is closed automatically when the result is empty.
+	You shouldn't use "cwindow".  Some features don't work well.
+  outputter/quickfix/into		Default: 0
+	Moves cursor to the |quickfix-window| if this isn't 0.
+
+- "outputter/loclist"			*quickrun-module-outputter/loclist*
+  Outputs on |location-list|.
+  Option ~
+  outputter/loclist/errorformat	Default: "&errorformat"
+	'errorformat' option to parse the output.
+  outputter/loclist/open_cmd		Default: "lopen"
+	The command to open |location-list-window|.
+	The window is closed automatically when the result is empty.
+	You shouldn't use "lwindow".  Some features don't work well.
+  outputter/loclist/into		Default: 0
+	Moves cursor to the |location-list-window| if this isn't 0.
 
 - "outputter/browser"			*quickrun-module-outputter/browser*
   {Requires |open-browser|}
@@ -733,6 +748,11 @@ session.sweep()				*quickrun-session.sweep()*
 	Further, if it has an attribute "_vimproc", forcefully terminates the
 	|vimproc|.  This is handy, however, they don't care naming collisions
 	by multiple modules.  The author is going to solve them in the future.
+
+session.config				*quickrun-session.config*
+	|quickrun-options| as an dictionary.  You available the normalized
+	config from |quickrun-hook-point-normalized|.  Note that all options
+	may be not available.
 
 ------------------------------------------------------------------------------
 MODULE COMMON ATTRIBUTES		*quickrun-module-attributes*
