@@ -67,6 +67,9 @@ set smartcase
 set wrapscan
 set hlsearch
 
+" Clipbord share"
+set clipboard=unnamed,autoselect
+
 " View
 colorscheme desert
 syntax on
