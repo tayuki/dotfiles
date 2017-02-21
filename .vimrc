@@ -130,7 +130,10 @@ autocmd FileType javascript let g:AutoComplPop_CompleteOption = '.,w,b,u,t,i,k~/
 
 " Mark down preview
 au BufRead,BufNewFile *.md set filetype=markdown
-let g:previm_open_cmd = 'open -a Firefox'
+"let g:previm_open_cmd = 'open -a Firefox'
+nnoremap <silent> <C-p> :PrevimOpen<CR> " Ctrl-pでプレビュー
+" 自動で折りたたまないようにする
+let g:vim_markdown_folding_disabled=1
 
 
 set autoindent
