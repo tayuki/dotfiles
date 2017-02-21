@@ -27,6 +27,9 @@ setopt pushd_ignore_dups
 setopt AUTO_CD
 setopt AUTO_LIST
 
+# iTerm
+REPORTTIME=1
+
 # vagrant
 export PATH="$PATH:/opt/vagrant/bin/:/usr/local/bin"
 
