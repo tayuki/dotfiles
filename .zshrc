@@ -31,7 +31,7 @@ setopt AUTO_LIST
 REPORTTIME=1
 
 # vagrant
-export PATH="$PATH:/opt/vagrant/bin/:/usr/local/bin"
+export PATH="/usr/local/bin:$PATH:/opt/vagrant/bin/"
 
 #auto modify incorrect command
 setopt correct
