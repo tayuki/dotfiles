@@ -22,6 +22,7 @@ vim-quickrun
 vim-rails
 vim-slim
 vim-surround
+vimfiler
 vimproc
 webapi-vim
 yaml-vim
