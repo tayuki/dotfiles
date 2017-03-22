@@ -52,10 +52,12 @@ alias ll='ls -la'
 alias rm='rm -i'
 alias blog='cd /Users/taka/middleman/blog3/source'
 alias v='vagrant'
-alias j='jekyll'
+alias jk='jekyll'
 alias mkd='mkdir `date +%Y%m%d`'
 alias ql='qlmanage -p "$@" >& /dev/null'
 
+# autojump
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 #display name and diretory at prompt
 PROMPT='%{$fg[blue]%}%n@%m:%(5~,%-2~/.../%2~,%~)%# '
