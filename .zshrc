@@ -67,6 +67,15 @@ PROMPT='%{$fg[blue]%}%n@%m:%(5~,%-2~/.../%2~,%~)%# '
 ### Added by takayuki for mosh
 export LANG=ja_JP.UTF-8
 
+# peco on zsh
+function peco-history-selection() {
+    BUFFER=`history -n 1 | tac  | awk '!a[$0]++' | peco`
+    CURSOR=$#BUFFER
+    zle reset-prompt
+}
+
+zle -N peco-history-selection
+bindkey '^R' peco-history-selection
 
 #export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:/usr/local/sbin"
