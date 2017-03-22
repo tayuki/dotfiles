@@ -55,7 +55,8 @@ alias v='vagrant'
 alias j='jekyll'
 alias mkd='mkdir `date +%Y%m%d`'
 alias ql='qlmanage -p "$@" >& /dev/null'
-
+#meld
+alias meld="open -W -a Meld --args "
 
 #display name and diretory at prompt
 PROMPT='%{$fg[blue]%}%n@%m:%(5~,%-2~/.../%2~,%~)%# '
