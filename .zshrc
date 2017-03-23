@@ -52,11 +52,14 @@ alias ll='ls -la'
 alias rm='rm -i'
 alias blog='cd /Users/taka/middleman/blog3/source'
 alias v='vagrant'
-alias j='jekyll'
+alias jk='jekyll'
 alias mkd='mkdir `date +%Y%m%d`'
 alias ql='qlmanage -p "$@" >& /dev/null'
 #meld
 alias meld="open -W -a Meld --args "
+
+# autojump
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 #display name and diretory at prompt
 PROMPT='%{$fg[blue]%}%n@%m:%(5~,%-2~/.../%2~,%~)%# '
@@ -209,3 +212,6 @@ function git_prompt_long_sha() {
   SHA=$(git rev-parse HEAD 2> /dev/null) && echo "$ZSH_THEME_GIT_PROMPT_SHA_BEFORE$SHA$ZSH_THEME_GIT_PROMPT_SHA_AFTER"
 }
 export PATH="$HOME/.embulk/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
