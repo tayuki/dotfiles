@@ -42,6 +42,7 @@ NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'glidenote/memolist.vim'
 NeoBundle 'chase/vim-ansible-yaml'
 NeoBundle 'Shougo/vimfiler'
+NeoBundle 'bronson/vim-trailing-whitespace'
 
 call neobundle#end()
 
