@@ -137,6 +137,15 @@ au BufRead,BufNewFile *.md set filetype=markdown
 nnoremap <silent> <C-p> :PrevimOpen<CR> " Ctrl-pでプレビュー
 " 自動で折りたたまないようにする
 let g:vim_markdown_folding_disabled=1
+"Adjust new list item indent"
+let g:vim_markdown_new_list_item_indent = 2
+"Do not require .md extensions for Markdown links"
+let g:vim_markdown_no_extensions_in_markdown = 1
+"Auto-write when following link"
+let g:vim_markdown_autowrite = 1
+"To disable conceal regardless"
+let g:vim_markdown_conceal = 0
+
 
 
 set autoindent
