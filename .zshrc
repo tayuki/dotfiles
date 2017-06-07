@@ -52,10 +52,14 @@ alias ll='ls -la'
 alias rm='rm -i'
 alias blog='cd /Users/taka/middleman/blog3/source'
 alias v='vagrant'
-alias j='jekyll'
+alias jk='jekyll'
 alias mkd='mkdir `date +%Y%m%d`'
 alias ql='qlmanage -p "$@" >& /dev/null'
+#meld
+alias meld="open -W -a Meld --args "
 
+# autojump
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 #display name and diretory at prompt
 PROMPT='%{$fg[blue]%}%n@%m:%(5~,%-2~/.../%2~,%~)%# '
@@ -66,6 +70,15 @@ PROMPT='%{$fg[blue]%}%n@%m:%(5~,%-2~/.../%2~,%~)%# '
 ### Added by takayuki for mosh
 export LANG=ja_JP.UTF-8
 
+# peco on zsh
+function peco-history-selection() {
+    BUFFER=`history -n 1 | tac  | awk '!a[$0]++' | peco`
+    CURSOR=$#BUFFER
+    zle reset-prompt
+}
+
+zle -N peco-history-selection
+bindkey '^R' peco-history-selection
 
 #export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:/usr/local/sbin"
@@ -221,3 +234,6 @@ function peco-z-search
 zle -N peco-z-search
 bindkey '^f' peco-z-search
 export PATH=/usr/local/bin:$PATH
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

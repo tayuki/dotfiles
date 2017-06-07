@@ -29,6 +29,7 @@ NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'tpope/vim-endwise'
+NeoBundle 'tpope/vim-repeat'
 NeoBundle 'yuroyoro/vim-autoclose'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'mrk21/yaml-vim'
@@ -40,6 +41,8 @@ NeoBundle 'kannokanno/previm'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'glidenote/memolist.vim'
 NeoBundle 'chase/vim-ansible-yaml'
+NeoBundle 'Shougo/vimfiler'
+NeoBundle 'bronson/vim-trailing-whitespace'
 
 call neobundle#end()
 
@@ -134,6 +137,15 @@ au BufRead,BufNewFile *.md set filetype=markdown
 nnoremap <silent> <C-p> :PrevimOpen<CR> " Ctrl-pでプレビュー
 " 自動で折りたたまないようにする
 let g:vim_markdown_folding_disabled=1
+"Adjust new list item indent"
+let g:vim_markdown_new_list_item_indent = 2
+"Do not require .md extensions for Markdown links"
+let g:vim_markdown_no_extensions_in_markdown = 1
+"Auto-write when following link"
+let g:vim_markdown_autowrite = 1
+"To disable conceal regardless"
+let g:vim_markdown_conceal = 0
+
 
 
 set autoindent
@@ -156,7 +168,15 @@ let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ }
 
-
+"viとの互換性を無効にする(INSERT中にカーソルキーが有効になる)
+set nocompatible
+"カーソルを行頭，行末で止まらないようにする
+set whichwrap=b,s,h,l,<,>,[,]
+"BSで削除できるものを指定する
+" indent  : 行頭の空白
+" eol     : 改行
+" start   : 挿入モード開始位置より手前の文字
+set backspace=indent,eol,start
 
 :set directory=/tmp
 
