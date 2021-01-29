@@ -45,9 +45,6 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 #alias
 #alias srv='mosh root@192.168.10.20'
 #alias ssh=~/bin/ssh-host-color
-alias srv='mosh taka@192.168.10.20'
-alias ops='ssh root@192.168.10.254'
-alias vps='ssh -p 3843 taka@36.55.232.44'
 alias ll='ls -la'
 alias rm='rm -i'
 alias blog='cd /Users/taka/middleman/blog3/source'
